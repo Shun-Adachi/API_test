@@ -4,24 +4,30 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateRestsTable extends Migration
 {
     /**
-     * Run the migrations.
-     */
-    public function up(): void
+    * Run the migrations.
+    *
+    * @return void
+    */
+    public function up()
     {
         Schema::create('rests', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('message');
+            $table->string('url');
+            $table->timestamp('created_at')->useCurrent()->nullable();
+            $table->timestamp('updated_at')->useCurrent()->nullable();
         });
     }
-
     /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    * Reverse the migrations.
+    *
+    * @return void
+    */
+    public function down()
     {
         Schema::dropIfExists('rests');
     }
-};
+}
