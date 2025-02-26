@@ -50,6 +50,18 @@ services:
     networks:
       - app-network
 
+  # Node.js/Nuxt.js 用のサービス追加例
+  nuxt:
+    image: node:22-alpine # Node.js の公式イメージ（必要に応じてバージョンを変更）
+    working_dir: /usr/src/app
+    volumes:
+      - ./nuxt-app:/usr/src/app # Nuxt.js アプリケーションのソースコードを配置するディレクトリ
+    ports:
+      - "3000:3000" # Nuxt.js の開発サーバーがデフォルトで 3000 番ポートを使用するため
+    command: sh -c "npm install && npm run dev"
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge
